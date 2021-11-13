@@ -9,7 +9,4 @@ const start = async () => {
 	}
 };
 
-//start();
-
-const str = '@mixin sample($argument1, $argument2) {';
-console.log(scssrules.mixinsWithArguments.test(str));
+start();

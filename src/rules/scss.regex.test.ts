@@ -112,6 +112,16 @@ describe('FUNCTIONS', () => {
 		expect(str).toMatch(rules.function);
 	})
 
+	test('function vs. valid function name in kebabcase', () => {
+		const str = '@function sample-function() {'
+		expect(str).toMatch(rules.function);
+	})
+
+	test('function vs. valid function name in snakecase', () => {
+		const str = '@function sample_function() {'
+		expect(str).toMatch(rules.function);
+	})
+
 	test('function vs. valid function with space', () => {
 		const str = '@function sample () {'
 		expect(str).toMatch(rules.function);
@@ -389,5 +399,113 @@ describe('VARIABLES', () => {
 	test('variable vs. invalid variable missing semicolon', () => {
 		const str = '$sample: #FF0000'
 		expect(str).not.toMatch(rules.variable);
+	})
+
+	test('variable vs. invalid variable missing value', () => {
+		const str = '$sample:'
+		expect(str).not.toMatch(rules.variable);
+	})
+})
+
+describe('MODULES', () => {
+	test('module vs. random string', () => {
+		const str = 'something'
+		expect(str).not.toMatch(rules.module);
+	})
+
+	test('module vs. plain color module usage', () => {
+		const str = 'color.scale(rebeccapurple, lightness: 50%);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain list module usage', () => {
+		const str = 'list.append($list, $val: $seperator: auto);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain map module usage', () => {
+		const str = 'map.get($config, a, b, c);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain math module usage', () => {
+		const str = 'math.ceil(4);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain math module constant usage assigned to a variable', () => {
+		const str = '$pi: math.$pi(4);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain meta module usage', () => {
+		const str = 'meta.load-css($url, $with: null);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain selector module usage', () => {
+		const str = 'selector.is-superselector($super, $sub);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain string module usage', () => {
+		const str = 'string.quote(Helvetica);'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. plain string module usage with quotes', () => {
+		const str = 'string.quote("Helvetica");'
+		expect(str).toMatch(rules.module);
+	})
+
+	test('module vs. sample fake module', () => {
+		const str = 'sample.sampleFunction("Helvetica");'
+		expect(str).not.toMatch(rules.module);
+	})
+
+	test('module vs. sample fake module', () => {
+		const str = 'background-color: sample.sampleFunction("Helvetica");'
+		expect(str).not.toMatch(rules.module);
+	})
+
+})
+
+
+
+
+describe('OPERATORS', () => {
+	test('operator vs. random string', () => {
+		const str = 'something'
+		expect(str).not.toMatch(rules.operator);
+	})
+
+	test('operator vs. multiplication on variable assignment', () => {
+		const str = '$variable: 12px * 3;'
+		expect(str).toMatch(rules.operator);
+	})
+
+	test('operator vs. addition on variable assignment', () => {
+		const str = '$variable: 12px + 3px;'
+		expect(str).toMatch(rules.operator);
+	})
+
+	test('operator vs. subtraction on variable assignment', () => {
+		const str = '$variable: 12px - 3px;'
+		expect(str).toMatch(rules.operator);
+	})
+
+	test('operator vs. modulo on variable assignment', () => {
+		const str = '$variable: 12px % 3px;'
+		expect(str).toMatch(rules.operator);
+	})
+
+	test('operator vs. non operational assignment with minus', () => {
+		const str = 'math.abs(-5px)'
+		expect(str).not.toMatch(rules.operator);
+	})
+
+	test('operator vs. operational assignment with minus', () => {
+		const str = '15px - 2px'
+		expect(str).toMatch(rules.operator);
 	})
 })

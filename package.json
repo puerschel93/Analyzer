@@ -5,7 +5,7 @@
   "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "analyze": "node analyze.js"
+    "analyze": "ts-node src/main.ts"
   },
   "author": "",
   "license": "ISC",

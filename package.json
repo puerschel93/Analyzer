@@ -1,26 +1,29 @@
 {
-  "name": "analyzer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "analyze": "ts-node src/main.ts"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@octokit/core": "^3.5.1",
-    "@octokit/rest": "^18.12.0",
-    "jquery": "^3.6.0",
-    "performance-now": "^2.1.0",
-    "puppeteer-extra": "^3.2.3",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@types/uuid": "^8.3.1",
-    "nodemon": "^2.0.14",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
-  }
+	"name": "analyzer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.ts",
+	"scripts": {
+		"analyze": "ts-node src/main.ts",
+		"test": "jest"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@octokit/core": "^3.5.1",
+		"@octokit/rest": "^18.12.0",
+		"@types/jest": "^27.0.2",
+		"jquery": "^3.6.0",
+		"performance-now": "^2.1.0",
+		"puppeteer-extra": "^3.2.3",
+		"ts-jest": "^27.0.7",
+		"uuid": "^8.3.2"
+	},
+	"devDependencies": {
+		"@types/uuid": "^8.3.1",
+		"jest": "^27.3.1",
+		"nodemon": "^2.0.14",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.4.4"
+	}
 }

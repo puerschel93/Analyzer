@@ -1,3 +1,5 @@
 # NODE
 node_modules
-./src/output
+
+# ANALYZE FILES
+src/input

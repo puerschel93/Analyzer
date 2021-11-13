@@ -1,7 +1,7 @@
 enum Preprocessor {
-  Sass,
-  Less,
-  Stylus,
+  SCSS = "scss",
+  LESS = "less",
+  STYLUS = "styl",
 }
 
 export default Preprocessor;

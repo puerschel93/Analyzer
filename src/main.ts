@@ -1,8 +1,11 @@
-import fs from "fs";
+import Analyzer from "./analyzer";
 
-console.log("forrst");
+const analyzers = Analyzer;
 
-fs.readFile("./main.ts", "utf8", (err, data) => {
-  if (err) throw err;
-  console.log(data);
-});
+const start = async () => {
+  for (const analyzer of analyzers) {
+    await analyzer.analyze();
+  }
+};
+
+start();

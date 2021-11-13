@@ -260,3 +260,134 @@ describe('EACH LOOP', () => {
 		expect(str).not.toMatch(rules.each);
 	})
 })
+
+describe('WHILE LOOP', () => {
+	test('while vs. random string', () => {
+		const str = 'something'
+		expect(str).not.toMatch(rules.while);
+	})
+
+	test('while vs. valid while loop', () => {
+		const str = '@while 15px > $sample {'
+		expect(str).toMatch(rules.while);
+	})
+
+	test('while vs. valid while loop with true as condition', () => {
+		const str = '@while true {'
+		expect(str).toMatch(rules.while);
+	})
+
+	test('while vs. valid while loop with !true as condition', () => {
+		const str = '@while !true {'
+		expect(str).toMatch(rules.while);
+	})
+
+	test('while vs. invalid while loop without break condition', () => {
+		const str = '@while {'
+		expect(str).not.toMatch(rules.while);
+	})
+
+	test('while vs. invalid while loop without identifier', () => {
+		const str = 'while true {'
+		expect(str).not.toMatch(rules.while);
+	})
+})
+
+describe('FOR LOOP', () => {
+	test('for vs. random string', () => {
+		const str = 'something'
+		expect(str).not.toMatch(rules.for);
+	})
+
+	test('for vs. valid for loop', () => {
+		const str = '@for $i from 1 through 29 {'
+		expect(str).toMatch(rules.for);
+	})
+
+	test('for vs. valid for loop with alternate variable name', () => {
+		const str = '@for $sampleValue5 from 1 through 29 {'
+		expect(str).toMatch(rules.for);
+	})
+
+	test('for vs. valid for loop with additional spaces', () => {
+		const str = '@for $sampleValue5     from 1       through 29 {'
+		expect(str).toMatch(rules.for);
+	})
+
+	test('for vs. invalid for loop with missing through', () => {
+		const str = '@for $i from 1 {'
+		expect(str).not.toMatch(rules.for);
+	})
+
+	test('for vs. invalid for loop with wrong variable declaration', () => {
+		const str = '@for i from 1 through 29 {'
+		expect(str).not.toMatch(rules.for);
+	})
+
+	test('for vs. invalid for loop with wrong from value', () => {
+		const str = '@for $i from a through 29 {'
+		expect(str).not.toMatch(rules.for);
+	})
+
+	test('for vs. invalid for loop with wrong through value', () => {
+		const str = '@for $i from 1 through z {'
+		expect(str).not.toMatch(rules.for);
+	})
+
+	test('for vs. invalid for loop with wrong through value', () => {
+		const str = '@for $i from 1 through z {'
+		expect(str).not.toMatch(rules.for);
+	})
+})
+
+describe('VARIABLES', () => {
+	test('variable vs. random string', () => {
+		const str = 'something'
+		expect(str).not.toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (rgba color)', () => {
+		const str = '$sample: rgba(255, 255, 255, 1);'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (hex color)', () => {
+		const str = '$sample: #FF0000;'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (important hex color)', () => {
+		const str = '$sample: #FF0000 !important;'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (size in px)', () => {
+		const str = '$sample: 15px;'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (size in %)', () => {
+		const str = '$sample: 15%;'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (string)', () => {
+		const str = '$sample: "content";'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. valid variable (other variable)', () => {
+		const str = '$sample: $otherVariable;'
+		expect(str).toMatch(rules.variable);
+	})
+
+	test('variable vs. invalid variable', () => {
+		const str = '$sample: ;'
+		expect(str).not.toMatch(rules.variable);
+	})
+
+	test('variable vs. invalid variable missing semicolon', () => {
+		const str = '$sample: #FF0000'
+		expect(str).not.toMatch(rules.variable);
+	})
+})

@@ -1,6 +1,6 @@
 import rules from "../../styl";
 
-describe('SCSS - IF STATEMENT', () => {
+describe('STYLUS - IF STATEMENT', () => {
 	test('if vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.if);

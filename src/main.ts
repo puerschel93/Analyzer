@@ -1,5 +1,4 @@
 import Analyzer from './analyzer';
-import scssrules from './rules/scss';
 
 const analyzers = Analyzer;
 
@@ -9,4 +8,8 @@ const start = async () => {
 	}
 };
 
-start();
+const test = async () => {
+	analyzers[1].analyze();
+};
+
+test();

@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('MODULES', () => {
+describe('SCSS - MODULES', () => {
 	test('module vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.module);
@@ -58,6 +58,16 @@ describe('MODULES', () => {
 
 	test('module vs. sample fake module', () => {
 		const str = 'background-color: sample.sampleFunction("Helvetica");'
+		expect(str).not.toMatch(rules.module);
+	})
+
+	test('module vs. other assignment containing color', () => {
+		const str = 'border-bottom: solid 10px $color-primary;'
+		expect(str).not.toMatch(rules.module);
+	})
+
+	test('module vs. file declaration', () => {
+		const str = 'url(../../map.png)'
 		expect(str).not.toMatch(rules.module);
 	})
 

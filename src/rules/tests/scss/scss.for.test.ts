@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('FOR LOOP', () => {
+describe('SCSS - FOR', () => {
 	test('for vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.for);

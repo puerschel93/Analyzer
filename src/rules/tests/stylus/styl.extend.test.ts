@@ -1,6 +1,6 @@
-import rules from "../../scss";
+import rules from "../../styl";
 
-describe('EXTEND', () => {
+describe('STYLUS - EXTEND', () => {
 	test('extend vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.extend);

@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('ELSE STATEMENT', () => {
+describe('SCSS - ELSE', () => {
 	test('else vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.else);

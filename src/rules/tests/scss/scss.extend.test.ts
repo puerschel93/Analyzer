@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('EXTEND', () => {
+describe('SCSS - EXTEND', () => {
 	test('extend vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.extend);
@@ -29,5 +29,10 @@ describe('EXTEND', () => {
 	test('extend vs. invalid extension', () => {
 		const str = '@extend'
 		expect(str).not.toMatch(rules.extend);
+	})
+
+	test('extend vs. valid extension with a non class or id based selector', () => {
+		const str = '@extend a'
+		expect(str).toMatch(rules.extend);
 	})
 })

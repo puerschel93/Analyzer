@@ -1,64 +1,45 @@
-import rules from "../../scss";
+import rules from "../../less";
 
-describe('MODULES', () => {
+describe('LESS - MODULES', () => {
 	test('module vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.module);
 	})
 
 	test('module vs. plain color module usage', () => {
-		const str = 'color.scale(rebeccapurple, lightness: 50%);'
+		const str = 'color("#aaa");'
 		expect(str).toMatch(rules.module);
 	})
 
 	test('module vs. plain list module usage', () => {
-		const str = 'list.append($list, $val: $seperator: auto);'
+		const str = 'append(@list, 3);'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain map module usage', () => {
-		const str = 'map.get($config, a, b, c);'
+	test('module vs. plain math module usage (floor)', () => {
+		const str = 'ceil(4.4);'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain math module usage', () => {
-		const str = 'math.ceil(4);'
+	test('module vs. plain math module usage (floor)', () => {
+		const str = 'floor(4.4);'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain math module constant usage assigned to a variable', () => {
-		const str = '$pi: math.$pi(4);'
+	test('module vs. plain math module assigned to variable (sqrt)', () => {
+		const str = '@sample: sqrt(9);'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain meta module usage', () => {
-		const str = 'meta.load-css($url, $with: null);'
+	test('module vs. plain type module usage (false)', () => {
+		const str = 'isurl(7.8%);'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain selector module usage', () => {
-		const str = 'selector.is-superselector($super, $sub);'
+	test('module vs. plain type module usage (true)', () => {
+		const str = 'isurl("www.prshl.de");'
 		expect(str).toMatch(rules.module);
 	})
 
-	test('module vs. plain string module usage', () => {
-		const str = 'string.quote(Helvetica);'
-		expect(str).toMatch(rules.module);
-	})
-
-	test('module vs. plain string module usage with quotes', () => {
-		const str = 'string.quote("Helvetica");'
-		expect(str).toMatch(rules.module);
-	})
-
-	test('module vs. sample fake module', () => {
-		const str = 'sample.sampleFunction("Helvetica");'
-		expect(str).not.toMatch(rules.module);
-	})
-
-	test('module vs. sample fake module', () => {
-		const str = 'background-color: sample.sampleFunction("Helvetica");'
-		expect(str).not.toMatch(rules.module);
-	})
 
 })

@@ -1,28 +1,28 @@
-import rules from "../../scss";
+import rules from "../../less";
 
-describe('IF STATEMENT', () => {
+describe('LESS - IF STATEMENT', () => {
 	test('if vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.if);
 	})
 
 	test('if vs. valid if statement', () => {
-		const str = '@if $value > 15px {'
+		const str = '.sample(@condition, @argument1) when (@condition = true) {'
 		expect(str).toMatch(rules.if);
 	})
 
-	test('if vs. valid if statement with single condition', () => {
-		const str = '@if $value {'
+	test('if vs. valid if statement with multiple arguments', () => {
+		const str = '.sample(@condition, @argument1, argument2) when (@condition = true) {'
 		expect(str).toMatch(rules.if);
 	})
 
-	test('if vs. valid if statement with missing brace', () => {
-		const str = '@if $value > 15px'
-		expect(str).not.toMatch(rules.if);
+	test('if vs. valid if statement with multiple conditions', () => {
+		const str = '.sample(@condition1, @condition2, argument1) when (@condition1 = true && @condition2 = false) {'
+		expect(str).toMatch(rules.if);
 	})
 
-	test('if vs. invalid if statement without condition', () => {
-		const str = '@if {'
+	test('if vs. invalid if statement without parameters', () => {
+		const str = 'if when (@condition = true) {'
 		expect(str).not.toMatch(rules.if);
 	})
 })

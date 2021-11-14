@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('WHILE LOOP', () => {
+describe('SCSS - WHILE', () => {
 	test('while vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.while);

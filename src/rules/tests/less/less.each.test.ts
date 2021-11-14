@@ -1,38 +1,28 @@
-import rules from "../../scss";
+import rules from "../../less";
 
-describe('EACH LOOP', () => {
+describe('SCSS - EACH', () => {
 	test('each vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.each);
 	})
 
 	test('each vs. valid each loop by variable', () => {
-		const str = '@each $sample in $samples {'
+		const str = 'each(@set, {'
 		expect(str).toMatch(rules.each);
 	})
 
-	test('each vs. valid each loop by value', () => {
-		const str = '@each $sample in 15px {'
+	test('each vs. valid each loop by mixin', () => {
+		const str = '  each(.set-2(), .(@v, @k, @i) {'
 		expect(str).toMatch(rules.each);
 	})
 
-	test('each vs. valid each loop by array', () => {
-		const str = '@each $sample in 15px, 32px {'
+	test('each vs. valid each loop by range', () => {
+		const str = 'each(range(4), {'
 		expect(str).toMatch(rules.each);
 	})
 
-	test('each vs. invalid each loop by array with wrong separator', () => {
-		const str = '@each $sample in 15px; 32px {'
-		expect(str).not.toMatch(rules.each);
-	})
-
-	test('each vs. invalid each loop (wrong variable declaration)', () => {
-		const str = '@each sample in $samples {'
-		expect(str).not.toMatch(rules.each);
-	})
-
-	test('each vs. invalid each loop missing @ identifier', () => {
-		const str = 'each $sample in $samples'
+	test('each vs. misspelled each identifier', () => {
+		const str = 'earch(range(4), {'
 		expect(str).not.toMatch(rules.each);
 	})
 })

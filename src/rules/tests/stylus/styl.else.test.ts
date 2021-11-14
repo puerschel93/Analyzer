@@ -1,6 +1,6 @@
-import rules from "../../scss";
+import rules from "../../styl";
 
-describe('ELSE STATEMENT', () => {
+describe('STYLUS - ELSE', () => {
 	test('else vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.else);
@@ -13,16 +13,16 @@ describe('ELSE STATEMENT', () => {
 
 	test('if vs. invalid else statement with condition', () => {
 		const str = '} @else $value {'
-		expect(str).not.toMatch(rules.else);
+		expect(str).toMatch(rules.else);
 	})
 
 	test('if vs. valid if statement with missing braces', () => {
 		const str = '@else'
-		expect(str).not.toMatch(rules.else);
+		expect(str).toMatch(rules.else);
 	})
 
 	test('if vs. invalid else statement ', () => {
-		const str = '@else {'
-		expect(str).not.toMatch(rules.else);
+		const str = 'else {'
+		expect(str).toMatch(rules.else);
 	})
 })

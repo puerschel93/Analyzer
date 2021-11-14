@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('IF STATEMENT', () => {
+describe('SCSS - IF STATEMENT', () => {
 	test('if vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.if);

@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('FUNCTIONS', () => {
+describe('SCSS - FUNCTIONS', () => {
 	test('function vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.function);

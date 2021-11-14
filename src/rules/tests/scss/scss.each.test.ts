@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('EACH LOOP', () => {
+describe('SCSS - EACH', () => {
 	test('each vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.each);

@@ -1,6 +1,6 @@
 import rules from "../../scss";
 
-describe('MIXINS WITH ARGUMENTS', () => {
+describe('SCSS - MIXINS WITH ARGUMENTS', () => {
 	test('mixinWithArguments vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.mixinWithArguments);

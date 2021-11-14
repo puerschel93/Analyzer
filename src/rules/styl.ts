@@ -17,11 +17,11 @@ class Rules implements RuleSet {
 	if: RegExp = new RegExp(/[^]*(\bif)[ ]+[^]+/)
 	else: RegExp = new RegExp(/[\}]*[ ]*else[ ]*[\{]*/)
 	elseif: RegExp = new RegExp(/[\}]*[ ]*else if[ ]+[^]+[ ]*[\{]*/)
-	each: RegExp = new RegExp(/\@each[ ]+\$[a-zA-Z0-9]+[ ]+in[ ]+[a-zA-Z0-9\$\,\(\)\.\% ]+[ ]*\{/)
-	while: RegExp = new RegExp(/\@while[ ]+[a-zA-Z0-9\$ \,\<\>\=\!]+[ ]*\{/)
-	for: RegExp = new RegExp(/\@for[ ]+\$[a-zA-Z0-9]+[ ]+from[ ]+[0-9]+[ ]+through[ ]+[0-9]+[ ]*\{/)
-	variable: RegExp = new RegExp(/\$[a-zA-Z0-9\-\_ ]+\:[ ]*[^]+\;/)
-	module: RegExp = new RegExp(/[^]*(color|list|math|map|meta|selector|string)\.[a-zA-Z0-9\-\_\$]+\(+[^]*/)
+	each: RegExp = new RegExp(/.{0}/)
+	while: RegExp = new RegExp(/.{0}/)
+	for: RegExp = new RegExp(/[^]*(\bfor)[^]+(\bin) [^]+/)
+	variable: RegExp = new RegExp(/[a-zA-Z0-9\_\-\$ ]+\=[^]+/)
+	module: RegExp = new RegExp(/[^]*(\bred|\bblue|\bgreen|\balpha|\bdark|\blight|\bhue|\bsaturation|\blightness|\bhsla|\bhsl|\brgba|\brgb|\bblend|\blighten|\bdarken|\bdesaturate|\bsaturate|\bcomplement|\binvert|\bspin|\bgrayscale|\bmix|\btint|\bshade|\bluminosity|\bcontrast|\btransparentify|\bbasename|\bextname|\bpathjoin|\bpush|\bpop|\bshift|\bunshift|\bindex|\bkeys|\bvalues|\blength|\blast|\btypeof|\bunit|\bpercentage|\babs|\bceil|\bfloor|\bround|\bsin|\bcos|\btan|\bmin|\bmax|\beven|\bodd|\bsum|\bavg|\brange|\bbase\-convert|\bmatch|\breplace|\bjoin|\bsplit|\bsubstr|\bslice|\bunquote|\bconvert|\bcalled\-from|\bcurrent\-media|\b\+cache|\b\+prefix\-classes|\blookup|\bdefine|\blist\-separator|\boperate|\bselector|\bselector-exists|\bopposite-position|\bimage\-size|\bembedurl|\badd\-property|\bwarn|\berror|\bjson|\buse)\([^]+\)[^]*/)
 	operator: RegExp = new RegExp(/[^]+[ ](\*|\+|\-|\%)[ ]{1,}[^]*/)
 	array: RegExp[]
 

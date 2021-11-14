@@ -3,6 +3,7 @@ import Reader from './reader';
 import Logger from './utils/logger';
 import scss_rules from './rules/scss';
 import less_rules from './rules/less';
+import styl_rules from './rules/styl';
 import RuleSet from './rules/rules';
 
 class Analyzer {
@@ -71,6 +72,8 @@ class Analyzer {
 				return scss_rules;
 			case Preprocessor.LESS:
 				return less_rules;
+			case Preprocessor.STYLUS:
+				return styl_rules;
 			default:
 				return scss_rules;
 		}

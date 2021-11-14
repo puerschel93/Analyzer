@@ -1,6 +1,6 @@
 import rules from "../../styl";
 
-describe('SCSS - MODULES', () => {
+describe('STYLUS - MODULES', () => {
 	test('module vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.module);

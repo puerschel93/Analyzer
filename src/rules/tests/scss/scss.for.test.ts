@@ -11,8 +11,13 @@ describe('SCSS - FOR', () => {
 		expect(str).toMatch(rules.for);
 	})
 
-	test('for vs. valid for loop with alternate variable name', () => {
+	test('for vs. valid for loop with alternate variable name with through keyword', () => {
 		const str = '@for $sampleValue5 from 1 through 29 {'
+		expect(str).toMatch(rules.for);
+	})
+
+	test('for vs. valid for loop with alternate variable name with to keyword', () => {
+		const str = '@for $sampleValue5 from 1 to 29 {'
 		expect(str).toMatch(rules.for);
 	})
 

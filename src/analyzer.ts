@@ -42,7 +42,7 @@ class Analyzer {
 			// progress.update(++count);
 		}
 		this.protocol.write();
-		//progress.stop();
+		// progress.stop();
 		return;
 	}
 
@@ -52,7 +52,7 @@ class Analyzer {
 	 * all rules are tested on each line.
 	 * @param content array with all lines of the file
 	 */
-	analyzeFile(content: any) {
+	private analyzeFile(content: any) {
 		for (const line of content) {
 			this.analyzeLine(line);
 		}
@@ -63,12 +63,14 @@ class Analyzer {
 	 * rule set.
 	 * @param line
 	 */
-	analyzeLine(line: string) {
+	private analyzeLine(line: string) {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			if (passed) {
-				this.protocol.add(Object.keys(this.rules)[rule]);
+				if (Object.keys(this.rules)[rule] === 'mixinWithArguments')
+					console.log(line);
+				//this.protocol.add(Object.keys(this.rules)[rule]);
 			}
 		}
 	}

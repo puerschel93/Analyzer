@@ -10,4 +10,9 @@ const start = async () => {
 	Logger.success('All analyzers finished.\n');
 };
 
-start();
+const test = async () => {
+	analyzers[2].analyze();
+};
+
+test();
+//start();

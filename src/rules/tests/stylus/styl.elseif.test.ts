@@ -15,9 +15,4 @@ describe('STYLUS - ELSE IF', () => {
 		const str = 'else if'
 		expect(str).not.toMatch(rules.elseif);
 	})
-
-	test('else if vs. valid else if statement without beginning brae', () => {
-		const str = '} else if $value {'
-		expect(str).toMatch(rules.elseif);
-	})
 })

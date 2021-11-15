@@ -6,22 +6,22 @@ describe('SCSS - ELSE', () => {
 		expect(str).not.toMatch(rules.else);
 	})
 
-	test('if vs. valid else statement', () => {
+	test('else vs. valid else statement', () => {
 		const str = '} @else {'
 		expect(str).toMatch(rules.else);
 	})
 
-	test('if vs. invalid else statement with condition', () => {
+	test('else vs. invalid else statement with condition', () => {
 		const str = '} @else $value {'
 		expect(str).not.toMatch(rules.else);
 	})
 
-	test('if vs. valid if statement with missing braces', () => {
+	test('else vs. valid if statement with missing braces', () => {
 		const str = '@else'
 		expect(str).not.toMatch(rules.else);
 	})
 
-	test('if vs. invalid else statement ', () => {
+	test('else vs. invalid else statement ', () => {
 		const str = '@else {'
 		expect(str).not.toMatch(rules.else);
 	})

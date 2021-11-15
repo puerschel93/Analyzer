@@ -5,12 +5,15 @@ import scss_rules from './rules/scss';
 import less_rules from './rules/less';
 import styl_rules from './rules/styl';
 import RuleSet from './rules/rules';
+import cliProgress from 'cli-progress';
+import Protocol from './protocol';
 
 class Analyzer {
 	preprocessor: Preprocessor;
 	rules: RuleSet;
 	reader: Reader;
 	files: string[];
+	protocol: Protocol = new Protocol();
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -23,12 +26,24 @@ class Analyzer {
 	 * Analyze the given files from the input directory depending
 	 * on the preprocessor.
 	 */
-	async analyze(): Promise<void> {
-		Logger.info(this.preprocessor);
+	analyze(): void {
+		Logger.info('Starting analysis of ' + this.preprocessor);
+
+		const progress = new cliProgress.SingleBar(
+			{},
+			cliProgress.Presets.shades_classic
+		);
+		// progress.start(this.files.length, 0);
+		let count: number = 0;
+
 		for (const _file of this.files) {
 			const file: any = this.reader.readFile(_file).split('\n');
 			this.analyzeFile(file);
+			// progress.update(++count);
 		}
+		this.protocol.write();
+		//progress.stop();
+		return;
 	}
 
 	/**
@@ -37,9 +52,9 @@ class Analyzer {
 	 * all rules are tested on each line.
 	 * @param content array with all lines of the file
 	 */
-	async analyzeFile(content: any): Promise<void> {
+	analyzeFile(content: any) {
 		for (const line of content) {
-			await this.analyzeLine(line);
+			this.analyzeLine(line);
 		}
 	}
 
@@ -48,21 +63,18 @@ class Analyzer {
 	 * rule set.
 	 * @param line
 	 */
-	async analyzeLine(line: string): Promise<void> {
+	analyzeLine(line: string) {
 		line = line.trim();
 		for (const rule in this.rules.array) {
-			const passed = await this.rules.array[rule].test(line);
+			const passed = this.rules.array[rule].test(line);
 			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'module') {
-					Logger.success(Object.keys(this.rules)[rule]);
-					console.log(line);
-				}
+				this.protocol.add(Object.keys(this.rules)[rule]);
 			}
 		}
 	}
 
 	/**
-	 * Fetch set of rules for the given preprocessor.
+	 * Get set of rules for the given preprocessor.
 	 * @param preprocessor
 	 * @returns
 	 */

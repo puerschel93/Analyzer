@@ -2,6 +2,7 @@ import Logger from './utils/logger';
 
 class Protocol {
 	extend: number = 0;
+	mixins: number = 0;
 	mixinWithoutArguments: number = 0;
 	mixinWithArguments: number = 0;
 	function: number = 0;
@@ -27,9 +28,11 @@ class Protocol {
 				break;
 			case 'mixinWithoutArguments':
 				this.mixinWithoutArguments++;
+				this.mixins++;
 				break;
 			case 'mixinWithArguments':
 				this.mixinWithArguments++;
+				this.mixins++;
 				break;
 			case 'function':
 				this.function++;
@@ -67,7 +70,8 @@ class Protocol {
 	}
 
 	write(): void {
-		Logger.info(`\nExtend: ${this.extend}`);
+		Logger.info(`Extend: ${this.extend}`);
+		Logger.info(`Mixins: ${this.mixins}`);
 		Logger.info(`Mixin without arguments: ${this.mixinWithoutArguments}`);
 		Logger.info(`Mixin with arguments: ${this.mixinWithArguments}`);
 		Logger.info(`Function: ${this.function}`);

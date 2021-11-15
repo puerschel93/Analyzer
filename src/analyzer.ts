@@ -29,20 +29,19 @@ class Analyzer {
 	analyze(): void {
 		Logger.info('Starting analysis of ' + this.preprocessor);
 
-		const progress = new cliProgress.SingleBar(
-			{},
-			cliProgress.Presets.shades_classic
-		);
-		// progress.start(this.files.length, 0);
+		// prettier-ignore
+		const progress = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
+		progress.start(this.files.length, 0);
 		let count: number = 0;
 
 		for (const _file of this.files) {
 			const file: any = this.reader.readFile(_file).split('\n');
 			this.analyzeFile(file);
-			// progress.update(++count);
+			progress.update(++count);
 		}
 		this.protocol.write();
-		// progress.stop();
+		progress.stop();
 		return;
 	}
 
@@ -67,11 +66,7 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'mixinWithArguments')
-					console.log(line);
-				//this.protocol.add(Object.keys(this.rules)[rule]);
-			}
+			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
 	}
 

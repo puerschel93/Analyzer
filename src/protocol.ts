@@ -70,20 +70,7 @@ class Protocol {
 	}
 
 	write(): void {
-		Logger.info(`Extend: ${this.extend}`);
-		Logger.info(`Mixins: ${this.mixins}`);
-		Logger.info(`Mixin without arguments: ${this.mixinWithoutArguments}`);
-		Logger.info(`Mixin with arguments: ${this.mixinWithArguments}`);
-		Logger.info(`Function: ${this.function}`);
-		Logger.info(`If: ${this.if}`);
-		Logger.info(`Else: ${this.else}`);
-		Logger.info(`Elseif: ${this.elseif}`);
-		Logger.info(`Each: ${this.each}`);
-		Logger.info(`While: ${this.while}`);
-		Logger.info(`For: ${this.for}`);
-		Logger.info(`Variable: ${this.variable}`);
-		Logger.info(`Module: ${this.module}`);
-		Logger.info(`Operator: ${this.operator}\n`);
+		console.log('WROTE');
 	}
 }
 

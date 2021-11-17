@@ -1,6 +1,9 @@
 import Logger from './utils/logger';
+import Preprocessor from './enums/preprocessors';
+import fs from 'fs';
 
 class Protocol {
+	preprocessor: Preprocessor;
 	extend: number = 0;
 	mixins: number = 0;
 	mixinWithoutArguments: number = 0;
@@ -15,6 +18,12 @@ class Protocol {
 	variable: number = 0;
 	module: number = 0;
 	operator: number = 0;
+	cssVariable: number = 0;
+	calc: number = 0;
+
+	constructor(preprocessor: Preprocessor) {
+		this.preprocessor = preprocessor;
+	}
 
 	/**
 	 * Workaround to match type index to expression to write to
@@ -64,13 +73,63 @@ class Protocol {
 			case 'operator':
 				this.operator++;
 				break;
+			case 'cssVariable':
+				this.cssVariable++;
+				break;
+			case 'calc':
+				this.calc++;
+				break;
 			default:
 				Logger.error(`Unknown type: ${type}`);
 		}
 	}
 
-	write(): void {
-		console.log('WROTE');
+	async write(): Promise<void> {
+		// write file to directory
+		await fs.writeFile(
+			`./src/analysis/${this.preprocessor}.txt`,
+			this.stringify(),
+			(err) => (err ? console.log(err) : null)
+		);
+	}
+
+	stringify(): string {
+		return `
+			EXTENSION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Extend: ${this.extend}
+
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Mixins Total: ${this.mixins}
+			Mixin without arguments: ${this.mixinWithoutArguments}
+			Mixin with arguments: ${this.mixinWithArguments}
+
+			FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Function: ${this.function}
+			
+			CONDITIONALS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			If: ${this.if}
+			Else: ${this.else}
+			Elseif: ${this.elseif}
+			Each: ${this.each}
+
+			ITERATION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			While: ${this.while}
+			For: ${this.for}
+
+			VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Variable: ${this.variable}
+
+			BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Module: ${this.module}
+			Operator: ${this.operator}
+
+			VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			CSS Variable: ${this.cssVariable}
+			Calc(): ${this.calc}
+		`
+			.split('\n')
+			.map((str) => str.trim())
+			.join('\n');
 	}
 }
 

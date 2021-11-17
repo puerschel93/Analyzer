@@ -1,9 +1,10 @@
 import RuleSet from './rules';
+import CSSRules from './general';
 
-class Rules implements RuleSet {
+class Rules extends CSSRules implements RuleSet {
 	extend: RegExp = new RegExp(/^@extend (\#*|\.*|\:{0,1})[a-zA-Z-0-9\[\]\']+\;*/);
-	mixinWithoutArguments: RegExp = new RegExp(/^\@mixin[ ]+[a-zA-Z]+[ ]*\{/);
-  	mixinWithArguments: RegExp = new RegExp(/^\@mixin[ ]+[a-zA-Z]+[ ]*\(\$[^]+\) \{/)
+	mixinWithoutArguments: RegExp = new RegExp(/(?!)/);
+  	mixinWithArguments: RegExp = new RegExp(/^[ ]*\@mixin[^]+/)
 	function: RegExp = new RegExp(/^\@function[ ]+[a-zA-Z\-\_]+[ ]*\([^]*\) \{/);
 	if: RegExp = new RegExp(/^\@if[ ]+[^]+[ ]*\{/)
 	else: RegExp = new RegExp(/^\}[ ]*\@else[ ]*\{/)
@@ -17,11 +18,13 @@ class Rules implements RuleSet {
 	array: RegExp[]
 
 	constructor() {
+		super()
 		this.array = this.iteratable()
 	}
 
 	iteratable(): RegExp[] {
 		return [
+			...this.css(),
 			this.extend,
 			this.mixinWithoutArguments,
 			this.mixinWithArguments,

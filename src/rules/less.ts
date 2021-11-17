@@ -1,3 +1,4 @@
+import CSSRules from './general';
 import RuleSet from './rules';
 
 /**
@@ -16,7 +17,7 @@ import RuleSet from './rules';
  *   but the mixin-based approach is more accepted in the community. The alternative
  *   usage of the built-in Function version is tested in "module".
  */
-class Rules implements RuleSet {
+class Rules extends CSSRules implements RuleSet{
 	extend: RegExp = new RegExp(/^[^]+\:extend\([^]+\)\;/);
 	mixinWithoutArguments: RegExp = new RegExp(/(?!)/);
   	mixinWithArguments: RegExp = new RegExp(/^\.[^]+\(\@[a-zA-Z0-9\,\@ ]+\)[ ]*\{/);
@@ -33,11 +34,13 @@ class Rules implements RuleSet {
 	array: RegExp[];
 
 	constructor() {
+		super()
 		this.array = this.iteratable()
 	}
 
 	iteratable(): RegExp[] {
 		return [
+			...this.css(),
 			this.extend,
 			this.mixinWithoutArguments,
 			this.mixinWithArguments,

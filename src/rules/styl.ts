@@ -1,3 +1,4 @@
+import CSSRules from './general';
 import RuleSet from './rules';
 
 /**
@@ -9,7 +10,7 @@ import RuleSet from './rules';
  *	- Because the usage of Mixins is the same as the usage of built-in Functions all of the built-in Function
  *	  Keywords are excluded from the matching the mixins.
  */
-class Rules implements RuleSet {
+class Rules extends CSSRules implements RuleSet {
 	extend: RegExp = new RegExp(/^@extend (\#*|\.*|\:{0,1})[a-zA-Z-0-9\[\]\' ]+/);
 	mixinWithoutArguments: RegExp = new RegExp(/(?!)/)
   	mixinWithArguments: RegExp = new RegExp(/^[ ]*[a-zA-Z0-9\_\-\$]+(?<!\bred|\bblue|\bgreen|\balpha|\bdark|\blight|\bhue|\btransform|\bsaturation|\blightness|\bhsla|\bhsl|\brgba|\brgb|\bblend|\blighten|\bdarken|\bdesaturate|\bsaturate|\bcomplement|\binvert|\bspin|\bgrayscale|\bmix|\btint|\bshade|\bluminosity|\bcontrast|\btransparentify|\bbasename|\bextname|\bpathjoin|\bpush|\bpop|\bshift|\bunshift|\bindex|\bkeys|\bvalues|\blength|\blast|\btypeof|\bunit|\bpercentage|\babs|\bceil|\bfloor|\bround|\bsin|\bcos|\btan|\bmin|\bmax|\beven|\bodd|\bsum|\bavg|\brange|\bbase\-convert|\bmatch|\breplace|\bjoin|\bsplit|\bsubstr|\bslice|\bunquote|\bconvert|\bcalled\-from|\bcurrent\-media|\b\+cache|\b\+prefix\-classes|\blookup|\bdefine|\boperate|\bselector|\bselector-exists|\burl|\bcubic\-bezier|\b\:not|\b\:nth|\bvar|\bopposite-position|\bimage\-size|\bembedurl|\badd\-property|\bwarn|\berror|\bjson|\buse)\([^]+\)/)
@@ -26,11 +27,13 @@ class Rules implements RuleSet {
 	array: RegExp[]
 
 	constructor() {
+		super()
 		this.array = this.iteratable()
 	}
 
 	iteratable(): RegExp[] {
 		return [
+			...this.css(),
 			this.extend,
 			this.mixinWithoutArguments,
 			this.mixinWithArguments,

@@ -7,18 +7,20 @@ import styl_rules from './rules/styl';
 import RuleSet from './rules/rules';
 import cliProgress from 'cli-progress';
 import Protocol from './protocol';
+import NestingParser from './nestingParser';
 
 class Analyzer {
 	preprocessor: Preprocessor;
 	rules: RuleSet;
 	reader: Reader;
 	files: string[];
-	protocol: Protocol = new Protocol();
+	protocol: Protocol;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
 		this.rules = this.getRules(preprocessor);
 		this.reader = new Reader(preprocessor);
+		this.protocol = new Protocol(preprocessor);
 		this.files = this.reader.readDirectory();
 	}
 
@@ -29,8 +31,10 @@ class Analyzer {
 	analyze(): void {
 		Logger.info('Starting analysis of ' + this.preprocessor);
 
-		// prettier-ignore
-		const progress = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+		const progress = new cliProgress.SingleBar(
+			{},
+			cliProgress.Presets.shades_classic
+		);
 
 		progress.start(this.files.length, 0);
 		let count: number = 0;
@@ -38,6 +42,7 @@ class Analyzer {
 		for (const _file of this.files) {
 			const file: any = this.reader.readFile(_file).split('\n');
 			this.analyzeFile(file);
+			this.parseNesting(file);
 			progress.update(++count);
 		}
 		this.protocol.write();
@@ -66,6 +71,11 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
+			/*if (passed) {
+				if (Object.keys(this.rules)[rule] === 'calc') {
+					console.log(line);
+				}
+			}*/
 			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
 	}
@@ -86,6 +96,11 @@ class Analyzer {
 			default:
 				return scss_rules;
 		}
+	}
+
+	parseNesting(content: string[]) {
+		const parser = new NestingParser(content, this.preprocessor);
+		parser.parse();
 	}
 
 	/**

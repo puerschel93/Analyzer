@@ -15,6 +15,7 @@ class Analyzer {
 	reader: Reader;
 	files: string[];
 	protocol: Protocol;
+	numberOfLines: number = 0;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -36,17 +37,18 @@ class Analyzer {
 			cliProgress.Presets.shades_classic
 		);
 
-		progress.start(this.files.length, 0);
-		let count: number = 0;
+		//progress.start(this.files.length, 0);
+		//let count: number = 0;
 
 		for (const _file of this.files) {
 			const file: any = this.reader.readFile(_file).split('\n');
 			this.analyzeFile(file);
 			this.parseNesting(file);
-			progress.update(++count);
+			//progress.update(++count);
 		}
-		this.protocol.write();
-		progress.stop();
+		//this.protocol.write();
+		Logger.info(`Number of lines ${this.numberOfLines}`);
+		//progress.stop();
 		return;
 	}
 
@@ -58,7 +60,8 @@ class Analyzer {
 	 */
 	private analyzeFile(content: any) {
 		for (const line of content) {
-			this.analyzeLine(line);
+			this.numberOfLines++;
+			//this.analyzeLine(line);
 		}
 	}
 

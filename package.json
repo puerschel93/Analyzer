@@ -17,11 +17,14 @@
 		"jquery": "^3.6.0",
 		"performance-now": "^2.1.0",
 		"puppeteer-extra": "^3.2.3",
+		"sast": "^0.8.1",
+		"scss-parser": "^1.0.5",
 		"ts-jest": "^27.0.7",
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"@types/cli-progress": "^3.9.2",
+		"@types/scss-parser": "^1.0.1",
 		"@types/uuid": "^8.3.1",
 		"jest": "^27.3.1",
 		"nodemon": "^2.0.14",

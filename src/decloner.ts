@@ -44,6 +44,7 @@ class Decloner {
 	async findClones(code: string, file: string): Promise<void> {
 		const time1 = now();
 		let files: string[] = this.reader.readDirectory();
+		if (!files.includes(file)) return;
 		let duplicates: number = 0;
 		for (const _file of files) {
 			if (file === _file) continue;

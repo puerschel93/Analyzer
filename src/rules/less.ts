@@ -29,7 +29,14 @@ class Rules extends CSSRules implements RuleSet{
 	while: RegExp = new RegExp(/(?!)/);
 	for: RegExp = new RegExp(/(?!)/);
 	variable: RegExp = new RegExp(/^\@[a-zA-Z0-9\-\_ ]+\:[ ]*[^]+\;/)
-	module: RegExp = new RegExp(/^[^]*(if|list|escape|replace|length|extract|range|ceil|floor|percentage|round|sqrt|abs|append|sin|asin|cos|acos|tan|atan|pi|pow|mod|min|max|isnumber|isstring|iscolor|iskeyword|isurl|ispixel|isem|ispercentage|isunit|isruleset|isdefined|color|image-size|image-width|image-height|convert|data-uri|default|unit|get-unit|svg-gradient|hue|saturation|lightness|hsvhue|hsvsaturation|hsvvalue|red|green|blue|alpha|luma|luminance|saturate|desaturate|lighten|darken|fadein|fadeout|fade|spin|mix|tint|shade|greyscale|contrast|multiply|screen|overlay|softlight|hardlight|difference|exclusion|average|negation)+\([^]*\)[^]*/)
+	module: RegExp = new RegExp(/^[^]*(\bescape|\breplace|\blength|\bextract|\brange|\bceil|\bfloor|\bpercentage|\bround|\bsqrt|\babs|\bappend|\bsin|\basin|\bcos|\bacos|\btan|\batan|\bpi|\bpow|\bmod|\bmin|\bmax|\bisnumber|\bisstring|\biscolor|\biskeyword|\bisurl|\bispixel|\bisem|\bispercentage|\bisunit|\bisruleset|\bisdefined|\bcolor|\bimage-size|\bimage-width|\bimage-height|\bconvert|\bdata-uri|\bdefault|\bunit|\bget-unit|\bsvg-gradient|\bhue|\bsaturation|\blightness|\bhsvhue|\bhsvsaturation|\bhsvvalue|\bred|\bgreen|\bblue|\balpha|\bluma|\bluminance|\bsaturate|\bdesaturate|\blighten|\bdarken|\bfadein|\bfadeout|\bfade|\bspin|\bmix|\btint|\bshade|\bgreyscale|\bcontrast|\bmultiply|\bscreen|\boverlay|\bsoftlight|\bhardlight|\bdifference|\bexclusion|\baverage|\bnegation)+\([^]*\)[^]*/)
+	colorModule: RegExp = new RegExp(/^[^]*(\bhue|\bsaturation|\blightness|\bhsvhue|\bhsvsaturation|\bhsvvalue|\bred|\bgreen|\bblue|\balpha|\bluma|\bluminance|\bsaturate|\bdesaturate|\blighten|\bdarken|\bfadein|\bfadeout|\bfade|\bspin|\bmix|\btint|\bshade|\bgreyscale|\bcontrast|\bmultiply|\bscreen|\boverlay|\bsoftlight|\bhardlight|\bdifference|\bexclusion|\baverage|\bnegation)+\([^]*\)[^]*/)
+	mathModule: RegExp = new RegExp(/^[^]*(\bceil|\bfloor|\bpercentage|\bround|\bsqrt|\babs|\bappend|\bsin|\basin|\bcos|\bacos|\btan|\batan|\bpi|\bpow|\bmod|\bmin|\bmax)+\([^]*\)[^]*/)
+	pathModule: RegExp = new RegExp(/(?!)/);
+	listModule: RegExp = new RegExp(/^[^]*(\blength|\bextract|\brange)+\([^]*\)[^]*/)
+	unitModule: RegExp = new RegExp(/^[^]*(\bisnumber|\bisstring|\biscolor|\biskeyword|\bisurl|\bispixel|\bisem|\bispercentage|\bisunit|\bisruleset|\bisdefined)+\([^]*\)[^]*/)
+	stringModule: RegExp = new RegExp(/^[^]*(\bescape|\breplace)+\([^]*\)[^]*/)
+	utilModule: RegExp = new RegExp(/^[^]*(\bcolor|\bimage-size|\bimage-width|\bimage-height|\bconvert|\bdata-uri|\bdefault|\bunit|\bget-unit|\bsvg-gradient)+\([^]*\)[^]*/)
 	operator: RegExp = new RegExp(/^[^]+[ ](\*|\+|\-|\%)[ ]{1,}[^]*/)
 	array: RegExp[];
 
@@ -53,6 +60,13 @@ class Rules extends CSSRules implements RuleSet{
 			this.for,
 			this.variable,
 			this.module,
+			this.colorModule,
+			this.mathModule,
+			this.pathModule,
+			this.listModule,
+			this.unitModule,
+			this.stringModule,
+			this.utilModule,
 			this.operator
 		]
 	}

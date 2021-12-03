@@ -7,7 +7,6 @@ import styl_rules from './rules/styl';
 import RuleSet from './rules/rules';
 import cliProgress from 'cli-progress';
 import Protocol from './protocol';
-import NestingParser from './nestingParser';
 
 class Analyzer {
 	preprocessor: Preprocessor;
@@ -15,7 +14,8 @@ class Analyzer {
 	reader: Reader;
 	files: string[];
 	protocol: Protocol;
-	numberOfLines: number = 0;
+	numberOfFiles: number = 0;
+	numberOfVariableFiles: number = 0;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -37,18 +37,16 @@ class Analyzer {
 			cliProgress.Presets.shades_classic
 		);
 
-		//progress.start(this.files.length, 0);
-		//let count: number = 0;
+		progress.start(this.files.length + 1, 1);
+		let count: number = 0;
 
 		for (const _file of this.files) {
 			const file: any = this.reader.readFile(_file).split('\n');
-			this.analyzeFile(file);
-			this.parseNesting(file);
-			//progress.update(++count);
+			const res = this.analyzeFile(file);
+			progress.update(++count);
 		}
-		//this.protocol.write();
-		Logger.info(`Number of lines ${this.numberOfLines}`);
-		//progress.stop();
+		this.protocol.write();
+		progress.stop();
 		return;
 	}
 
@@ -60,8 +58,7 @@ class Analyzer {
 	 */
 	private analyzeFile(content: any) {
 		for (const line of content) {
-			this.numberOfLines++;
-			//this.analyzeLine(line);
+			const res = this.analyzeLine(line);
 		}
 	}
 
@@ -75,12 +72,13 @@ class Analyzer {
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			/*if (passed) {
-				if (Object.keys(this.rules)[rule] === 'calc') {
-					console.log(line);
+				if (Object.keys(this.rules)[rule] === 'variable') {
+					return true;
 				}
 			}*/
 			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
+		return false;
 	}
 
 	/**
@@ -99,11 +97,6 @@ class Analyzer {
 			default:
 				return scss_rules;
 		}
-	}
-
-	parseNesting(content: string[]) {
-		const parser = new NestingParser(content, this.preprocessor);
-		parser.parse();
 	}
 
 	/**

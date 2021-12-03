@@ -1,7 +1,16 @@
+/**
+ * The protocol which writes the actual analyzed numbers.
+ * Created: 2021-11-28
+ * Author: Florian Pürschel
+ */
 import fs from 'fs';
 import Preprocessor from './enums/preprocessors';
 import Logger from './utils/logger';
 
+/**
+ * The protocol class contains all analyzable keywords and their respective values.
+ * @class Protocol
+ */
 class Protocol {
 	preprocessor: Preprocessor;
 	extend: number = 0;
@@ -116,6 +125,11 @@ class Protocol {
 		}
 	}
 
+	/**
+	 * Writes the protocol to a file
+	 * depending on the collected data.
+	 * @return {Promise<void>}
+	 */
 	async write(): Promise<void> {
 		// write file to directory
 		await fs.writeFile(
@@ -125,7 +139,11 @@ class Protocol {
 		);
 	}
 
-	stringify(): string {
+	/**
+	 * Returns a stringified version of the protocol.
+	 * @return {string}
+	 */
+	private stringify(): string {
 		return `
 			EXTENSION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			Extend: ${this.extend}

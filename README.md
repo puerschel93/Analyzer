@@ -1,6 +1,5 @@
-### WebScraper
-A script using Puppeteer to collect .scss, .sass, .less and .styl data from github.
-This is script is used exclusively for my bachelorthesis.
+### Analyzer
+A script to analyze or declone the collected data from the [WebScraper](https://github.com/puerschel93/WebScraper) project.
 
 -----
 

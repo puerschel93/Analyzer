@@ -58,7 +58,7 @@ class Analyzer {
 	 */
 	private analyzeFile(content: any) {
 		for (const line of content) {
-			const res = this.analyzeLine(line);
+			this.analyzeLine(line);
 		}
 	}
 
@@ -72,15 +72,11 @@ class Analyzer {
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'module') {
-					console.log(this.preprocessor);
+				if (Object.keys(this.rules)[rule] === 'unitModule')
 					console.log(line);
-					//return true;
-				}
+				this.protocol.add(Object.keys(this.rules)[rule]);
 			}
-			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
-		return false;
 	}
 
 	/**

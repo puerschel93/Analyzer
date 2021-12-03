@@ -24,7 +24,14 @@ VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Variable: 203932
 
 BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Module: 66033
+Module: 64612
+Color Module: 25574
+Math Module: 10186
+Path Module: 5692
+String Module: 6371
+List Module: 8159
+Unit Module: 12829
+Util Module: 4466
 Operator: 71238
 
 VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

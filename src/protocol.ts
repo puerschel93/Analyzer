@@ -1,6 +1,6 @@
-import Logger from './utils/logger';
-import Preprocessor from './enums/preprocessors';
 import fs from 'fs';
+import Preprocessor from './enums/preprocessors';
+import Logger from './utils/logger';
 
 class Protocol {
 	preprocessor: Preprocessor;
@@ -17,6 +17,13 @@ class Protocol {
 	for: number = 0;
 	variable: number = 0;
 	module: number = 0;
+	colorModule: number = 0;
+	mathModule: number = 0;
+	pathModule: number = 0;
+	stringModule: number = 0;
+	listModule: number = 0;
+	unitModule: number = 0;
+	utilModule: number = 0;
 	operator: number = 0;
 	cssVariable: number = 0;
 	calc: number = 0;
@@ -70,6 +77,27 @@ class Protocol {
 			case 'module':
 				this.module++;
 				break;
+			case 'colorModule':
+				this.colorModule++;
+				break;
+			case 'mathModule':
+				this.mathModule++;
+				break;
+			case 'pathModule':
+				this.pathModule++;
+				break;
+			case 'stringModule':
+				this.stringModule++;
+				break;
+			case 'listModule':
+				this.listModule++;
+				break;
+			case 'unitModule':
+				this.unitModule++;
+				break;
+			case 'utilModule':
+				this.utilModule++;
+				break;
 			case 'operator':
 				this.operator++;
 				break;
@@ -89,7 +117,7 @@ class Protocol {
 		await fs.writeFile(
 			`./src/analysis/${this.preprocessor}.txt`,
 			this.stringify(),
-			(err) => (err ? console.log(err) : null)
+			(err) => (err ? Logger.error('Failed.') : null)
 		);
 	}
 
@@ -121,6 +149,13 @@ class Protocol {
 
 			BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			Module: ${this.module}
+			Color Module: ${this.colorModule}
+			Math Module: ${this.mathModule}
+			Path Module: ${this.pathModule}
+			String Module: ${this.stringModule}
+			List Module: ${this.listModule}
+			Unit Module: ${this.unitModule}
+			Util Module: ${this.utilModule}
 			Operator: ${this.operator}
 
 			VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

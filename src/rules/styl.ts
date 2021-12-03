@@ -53,6 +53,13 @@ class Rules extends CSSRules implements RuleSet {
 			this.for,
 			this.variable,
 			this.module,
+			this.colorModule,
+			this.mathModule,
+			this.pathModule,
+			this.listModule,
+			this.unitModule,
+			this.stringModule,
+			this.utilModule,
 			this.operator
 		]
 	}

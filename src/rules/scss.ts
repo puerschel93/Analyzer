@@ -1,5 +1,5 @@
-import RuleSet from './rules';
 import CSSRules from './general';
+import RuleSet from './rules';
 
 class Rules extends CSSRules implements RuleSet {
 	extend: RegExp = new RegExp(/^@extend (\#*|\.*|\:{0,1})[a-zA-Z-0-9\[\]\']+\;*/);
@@ -13,7 +13,15 @@ class Rules extends CSSRules implements RuleSet {
 	while: RegExp = new RegExp(/^\@while[ ]+[a-zA-Z0-9\$ \,\<\>\=\!]+[ ]*\{/)
 	for: RegExp = new RegExp(/^\@for[ ]+\$[a-zA-Z0-9]+[ ]+from[ ]+[0-9]+[ ]+(through|to)[ ]+[0-9]+[ ]*\{/)
 	variable: RegExp = new RegExp(/^\$[a-zA-Z0-9\-\_ ]+\:[ ]*[^]+\;/)
-	module: RegExp = new RegExp(/^[^]*(adjust|adjust\-color|adjust\-hue|alpha|opacity|blackness|whiteness|red|blue|green|change|change\-color|complement|darken|desaturate|grayscale|saturation|lightness|lighten|hwb|ie\-hex\-str|invert|mix|opacify|fade\-in|saturate|transparentize|fade\-out|scale|append|index|is\-bracketed|join|length|list\-separator|separator|nth|set\-nth|slash|zip|map\-get|get|has\-key|map\-has\-key|keys|merge|map\-merge|map\-remove|remove|set|values|set\-values|ceil|clamp|floor|max|min|round|abs|hypot|log|pow|sqrt|cos|sin|tan|acos|asin|atan|atan2|compatible|comparable|is\-unitless|unitless|unit|div|percentage|random|load\-css|calc\-args|calc\-name|call|content\-exists|feature\-exists|function\-exists|get\-function|global\-variable\-exists|inspect|keywords|mixin\-exists|module\-functions|module\-variables|type\-of|is\-superselector|unquote|selector\-append|extend|selector\-extend|nest|selector\-nest|parse|selector\-parse|replace|selector\-replace|unify|selector\-unify|simple\-selectors|quote|index|str\-index|str\-insert|insert|length|str\-length|slice|str\-slice|to\-upper\-case|to\-lower\-case|unique\-id)+\(+[^]*/)
+	module: RegExp = new RegExp(/^[^]*(\badjust|\badjust\-color|\badjust\-hue|\balpha|\bopacity|\bblackness|\bwhiteness|\bred|\bblue|\bgreen|\bchange|\bchange\-color|\bcomplement|\bdarken|\bdesaturate|\bgrayscale|\bsaturation|\blightness|\blighten|\bhwb|\bie\-hex\-str|\binvert|\bmix|\bopacify|\bfade\-in|\bsaturate|\btransparentize|\bfade\-out|\bscale|\bappend|\bindex|\bis\-bracketed|\bjoin|\blength|\blist\-separator|\bseparator|\bnth|\bset\-nth|\bslash|\bzip|\bmap\-get|\bget|\bhas\-key|\bmap\-has\-key|\bkeys|\bmerge|\bmap\-merge|\bmap\-remove|\bremove|\bset|\bvalues|\bset\-values|\bceil|\bclamp|\bfloor|\bmax|\bmin|\bround|\babs|\bhypot|\blog|\bpow|\bsqrt|\bcos|\bsin|\btan|\bacos|\basin|\batan|\batan2|\bcompatible|\bcomparable|\bis\-unitless|\bunitless|\bunit|\bdiv|\bpercentage|\brandom|\bload\-css|\bcalc\-args|\bcalc\-name|\bcall|\bcontent\-exists|\bfeature\-exists|\bfunction\-exists|\bget\-function|\bglobal\-variable\-exists|\binspect|\bkeywords|\bmixin\-exists|\bmodule\-functions|\bmodule\-variables|\btype\-of|\bis\-superselector|\bunquote|\bselector\-append|\bextend|\bselector\-extend|\bnest|\bselector\-nest|\bparse|\bselector\-parse|\breplace|\bselector\-replace|\bunify|\bselector\-unify|\bsimple\-selectors|\bquote|\bindex|\bstr\-index|\bstr\-insert|\binsert|\blength|\bstr\-length|\bslice|\bstr\-slice|\bto\-upper\-case|\bto\-lower\-case|\bunique\-id)+\(+[^]*/)
+	colorModule: RegExp  = new RegExp(/^[^]*(\badjust|\badjust\-color|\badjust\-hue|\balpha|\bopacity|\bblackness|\bwhiteness|\bred|\bblue|\bgreen|\bchange|\bchange\-color|\bcomplement|\bdarken|\bdesaturate|\bgrayscale|\bsaturation|\blightness|\blighten|\bhwb|\bie\-hex\-str|\binvert|\bmix|\bopacify|\bfade\-in|\bsaturate|\btransparentize|\bfade\-out|\bscale)+\(+[^]*/)
+	mathModule: RegExp = new RegExp(/^[^]*(\bceil|\bclamp|\bfloor|\bmax|\bmin|\bround|\babs|\bhypot|\blog|\bpow|\bsqrt|\bcos|\bsin|\btan|\bacos|\basin|\batan|\batan2\bcompatible|\bcomparable|\bis\-unitless|\bunitless|\bunit|\bdiv|\bpercentage|\brandom)+\(+[^]*/)
+	pathModule: RegExp  = new RegExp(/^[^]*(\bis\-superselector|\bunquote|\bselector\-append|\bextend|\bselector\-extend|\bnest|\bselector\-nest|\bparse|\bselector\-parse|\breplace|\bselector\-replace|\bunify|\bselector\-unify|\bsimple\-selectors)+\(+[^]*/) 
+	listModule: RegExp = new RegExp(/^[^]*(\bappend|\bindex|\bis\-bracketed|\bjoin|\blength|\blist\-separator|\bseparator|\bnth|\bset\-nth|\bslash|\bzip)+\(+[^]*/) 
+	/** Utilized as misc. */
+	unitModule: RegExp = new RegExp(/^[^]*(\bmap\-get|\bget|\bhas\-key|\bmap\-has\-key|\bkeys|\bmerge|\bmap\-merge|\bmap\-remove|\bremove|\bset|\bvalues)+\(+[^]*/) 
+	stringModule: RegExp = new RegExp(/^[^]*(\bquote|\bindex|\bstr\-index|\bstr\-insert|\binsert|\blength|\bstr\-length|\bslice|\bstr\-slice|\bto\-upper\-case|\bto\-lower\-case|\bunique\-id)+\(+[^]*/) 
+	utilModule: RegExp = new RegExp(/^[^]*(\bload\-css|\bcalc\-args|\bcalc\-name|\bcall|\bcontent\-exists|\bfeature\-exists|\bfunction\-exists|\bget\-function|\bglobal\-variable\-exists|\binspect|\bkeywords|\bmixin\-exists|\bmodule\-functions|\bmodule\-variables|\btype\-of)+\(+[^]*/) 
 	operator: RegExp = new RegExp(/^[^]+[ ](\*|\+|\-|\%)[ ]{1,}[^]*/)
 	array: RegExp[]
 
@@ -37,6 +45,13 @@ class Rules extends CSSRules implements RuleSet {
 			this.for,
 			this.variable,
 			this.module,
+			this.colorModule,
+			this.mathModule,
+			this.pathModule,
+			this.listModule,
+			this.unitModule,
+			this.stringModule,
+			this.utilModule,
 			this.operator
 		]
 	}

@@ -4,15 +4,20 @@ This is script is used exclusively for my bachelorthesis.
 
 -----
 
+Analyzable files are not included.
+Add files to `src/input/:extension`.
+
+-----
+
 ### How to use
 
 
 To run the analyzer
 ```
-npm run start --analyze
+npm run analyze
 ```
 
 To run the decloner
 ```
-npm run start --declone
+npm run declone
 ```

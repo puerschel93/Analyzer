@@ -11,7 +11,7 @@ import Logger from './utils/logger';
  * Runs a function depending on the given command.
  */
 const start = (): void => {
-	const args = process.argv?.[0] ?? '';
+	const args = process.argv?.[2] ?? '';
 	switch (args) {
 		case 'analyze':
 			analyze();

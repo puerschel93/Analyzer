@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "main.ts",
 	"scripts": {
-		"start": "ts-node src/main.ts [-- <args>]",
+		"analyze": "ts-node src/main.ts analyze",
+		"declone": "ts-node src/main.ts declone",
 		"test": "jest"
 	},
 	"author": "",

@@ -71,11 +71,7 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'unitModule')
-					console.log(line);
-				this.protocol.add(Object.keys(this.rules)[rule]);
-			}
+			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
 	}
 

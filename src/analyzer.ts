@@ -1,12 +1,12 @@
-import Preprocessor from './enums/preprocessors';
-import Reader from './reader';
-import Logger from './utils/logger';
-import scss_rules from './rules/scss';
-import less_rules from './rules/less';
-import styl_rules from './rules/styl';
-import RuleSet from './rules/rules';
 import cliProgress from 'cli-progress';
+import Preprocessor from './enums/preprocessors';
 import Protocol from './protocol';
+import Reader from './reader';
+import less_rules from './rules/less';
+import RuleSet from './rules/rules';
+import scss_rules from './rules/scss';
+import styl_rules from './rules/styl';
+import Logger from './utils/logger';
 
 class Analyzer {
 	preprocessor: Preprocessor;
@@ -71,11 +71,13 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			/*if (passed) {
-				if (Object.keys(this.rules)[rule] === 'variable') {
-					return true;
+			if (passed) {
+				if (Object.keys(this.rules)[rule] === 'module') {
+					console.log(this.preprocessor);
+					console.log(line);
+					//return true;
 				}
-			}*/
+			}
 			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
 		return false;

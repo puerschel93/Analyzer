@@ -1,9 +1,18 @@
+/**
+ * Created: 2021-11-28
+ * Author: Florian Pürschel
+ */
 import fs from 'fs';
 import now from 'performance-now';
 import Preprocessor from './enums/preprocessors';
 import Reader from './reader';
 import Logger from './utils/logger';
 
+/**
+ * The decloner class is used to delete all clones in the input
+ * directories.
+ * @class Decloner
+ */
 class Decloner {
 	preprocessor: Preprocessor;
 	reader: Reader;
@@ -13,6 +22,10 @@ class Decloner {
 		this.reader = new Reader(preprocessor);
 	}
 
+	/**
+	 * The main function of the decloner.
+	 * @returns {Promise<void>}
+	 */
 	async declone(): Promise<void> {
 		let files: string[] = this.reader.readDirectory();
 		for (const file of files) {
@@ -21,6 +34,13 @@ class Decloner {
 		}
 	}
 
+	/**
+	 * The find clones function iterates over all files and searches for clones
+	 * in the input directory.
+	 * @param code The code to search for clones
+	 * @param file The filename
+	 * @returns {Promise<void>}
+	 */
 	async findClones(code: string, file: string): Promise<void> {
 		const time1 = now();
 		let files: string[] = this.reader.readDirectory();
@@ -47,11 +67,21 @@ class Decloner {
 		return;
 	}
 
+	/**
+	 * The compare function compares two files and returns true if they are equal.
+	 * @param code1 The first code
+	 * @param code2 The second code
+	 */
 	async compare(code: string, code2: string | boolean): Promise<boolean> {
 		if (typeof code2 !== 'string') return false;
 		return code === code2;
 	}
 
+	/**
+	 * The function initializes Decloner Objects for all preprocessors
+	 * and returns them as an array.
+	 * @returns {Decloner[]}
+	 */
 	static initialize(): Decloner[] {
 		return [
 			new Decloner(Preprocessor.SCSS),

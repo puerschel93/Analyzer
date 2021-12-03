@@ -6,6 +6,7 @@ interface RuleSet {
 	if: RegExp;
 	else: RegExp;
 	elseif: RegExp;
+	unless: RegExp;
 	each: RegExp;
 	while: RegExp;
 	for: RegExp;

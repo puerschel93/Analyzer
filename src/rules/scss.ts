@@ -9,6 +9,7 @@ class Rules extends CSSRules implements RuleSet {
 	if: RegExp = new RegExp(/^\@if[ ]+[^]+[ ]*\{/)
 	else: RegExp = new RegExp(/^\}[ ]*\@else[ ]*\{/)
 	elseif: RegExp = new RegExp(/^\}[ ]*\@else if[ ]+[^]+[ ]*\{/)
+	unless: RegExp = new RegExp(/(?!)/)
 	each: RegExp = new RegExp(/^\@each[ ]+\$[a-zA-Z0-9]+[ ]+in[ ]+[a-zA-Z0-9\$\,\(\)\.\% ]+[ ]*\{/)
 	while: RegExp = new RegExp(/^\@while[ ]+[a-zA-Z0-9\$ \,\<\>\=\!]+[ ]*\{/)
 	for: RegExp = new RegExp(/^\@for[ ]+\$[a-zA-Z0-9]+[ ]+from[ ]+[0-9]+[ ]+(through|to)[ ]+[0-9]+[ ]*\{/)
@@ -40,6 +41,7 @@ class Rules extends CSSRules implements RuleSet {
 			this.if,
 			this.else,
 			this.elseif,
+			this.unless,
 			this.each,
 			this.while,
 			this.for,

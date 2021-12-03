@@ -18,6 +18,7 @@ class Rules extends CSSRules implements RuleSet {
 	if: RegExp = new RegExp(/^[^]*(\bif)[ ]+[^]+/)
 	else: RegExp = new RegExp(/^[\}]*[ ]*else[ ]*[\{]*/)
 	elseif: RegExp = new RegExp(/^[\}]*[ ]*else if[ ]+[^]+[ ]*[\{]*/)
+	unless: RegExp = new RegExp(/^[ ]*unless[ ]+[^]+[ ]*[\{]*/)
 	each: RegExp = new RegExp(/(?!)/)
 	while: RegExp = new RegExp(/(?!)/)
 	for: RegExp = new RegExp(/^[^]*(\bfor)[^]+(\bin) [^]+/)
@@ -48,6 +49,7 @@ class Rules extends CSSRules implements RuleSet {
 			this.if,
 			this.else,
 			this.elseif,
+			this.unless,
 			this.each,
 			this.while,
 			this.for,

@@ -15,9 +15,13 @@ class Reader {
 			.filter((filename) => !filename.toLowerCase().includes('ds_store'));
 	}
 
-	readFile(filename: string): string {
-		const file = fs.readFileSync(`${this.path}/${filename}`, 'utf-8');
-		return file;
+	readFile(filename: string): string | boolean {
+		try {
+			const file = fs.readFileSync(`${this.path}/${filename}`, 'utf-8');
+			return file;
+		} catch (error) {
+			return false;
+		}
 	}
 }
 

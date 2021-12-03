@@ -25,6 +25,7 @@ class Rules extends CSSRules implements RuleSet{
 	if: RegExp = new RegExp(/^[^]+\(\@[^]+\)[ ]*when[ ]*\(\@[^]+\)[ ]*\{/);
 	else: RegExp = new RegExp(/(?!)/);
 	elseif: RegExp = new RegExp(/(?!)/);
+	unless: RegExp = new RegExp(/(?!)/)
 	each: RegExp = new RegExp(/^[^]*each\([a-zA-Z0-9\@\_\-\.\{\}\(\)\, ]+[ ]*\{/);
 	while: RegExp = new RegExp(/(?!)/);
 	for: RegExp = new RegExp(/(?!)/);
@@ -55,6 +56,7 @@ class Rules extends CSSRules implements RuleSet{
 			this.if,
 			this.else,
 			this.elseif,
+			this.unless,
 			this.each,
 			this.while,
 			this.for,

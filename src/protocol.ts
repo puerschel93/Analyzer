@@ -12,6 +12,7 @@ class Protocol {
 	if: number = 0;
 	else: number = 0;
 	elseif: number = 0;
+	unless: number = 0;
 	each: number = 0;
 	while: number = 0;
 	for: number = 0;
@@ -61,6 +62,9 @@ class Protocol {
 				break;
 			case 'elseif':
 				this.elseif++;
+				break;
+			case 'unless':
+				this.unless++;
 				break;
 			case 'each':
 				this.each++;
@@ -138,11 +142,12 @@ class Protocol {
 			If: ${this.if}
 			Else: ${this.else}
 			Elseif: ${this.elseif}
-			Each: ${this.each}
+			Unless: ${this.unless}
 
 			ITERATION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			While: ${this.while}
 			For: ${this.for}
+			Each: ${this.each}
 
 			VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			Variable: ${this.variable}

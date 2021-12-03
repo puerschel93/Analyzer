@@ -41,8 +41,10 @@ class Analyzer {
 		let count: number = 0;
 
 		for (const _file of this.files) {
-			const file: any = this.reader.readFile(_file).split('\n');
-			const res = this.analyzeFile(file);
+			let file: string | boolean = this.reader.readFile(_file);
+			if (typeof file === 'string') file.split('\n');
+			else continue;
+			this.analyzeFile(file);
 			progress.update(++count);
 		}
 		this.protocol.write();
@@ -71,7 +73,13 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
+			if (passed) {
+				if (this.preprocessor === Preprocessor.STYLUS) {
+					if (Object.keys(this.rules)[rule] === 'elseif')
+						console.log(line);
+				}
+				this.protocol.add(Object.keys(this.rules)[rule]);
+			}
 		}
 	}
 

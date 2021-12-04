@@ -2,7 +2,6 @@
  * Created: 2021-12-03
  * Author: Florian Pürschel
  */
-import cliProgress from 'cli-progress';
 import Preprocessor from './enums/preprocessors';
 import Protocol from './protocol';
 import Reader from './reader';
@@ -24,6 +23,7 @@ class Analyzer {
 	protocol: Protocol;
 	numberOfFiles: number = 0;
 	numberOfVariableFiles: number = 0;
+	numberOfLines: number = 0;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -40,22 +40,24 @@ class Analyzer {
 	analyze(): void {
 		Logger.info('Starting analysis of ' + this.preprocessor);
 
-		const progress = new cliProgress.SingleBar(
+		/*const progress = new cliProgress.SingleBar(
 			{},
 			cliProgress.Presets.shades_classic
-		);
+		);*/
 
-		progress.start(this.files.length + 1, 1);
+		//progress.start(this.files.length + 1, 1);
 		let count: number = 0;
 
 		for (const _file of this.files) {
 			const file: string | boolean = this.reader.readFile(_file);
 			if (typeof file === 'boolean') continue;
 			this.analyzeFile(file);
-			progress.update(++count);
+			//progress.update(++count);
 		}
-		this.protocol.write();
-		progress.stop();
+		Logger.info('Finished analysis of ' + this.preprocessor);
+		Logger.info('Number of lines: ' + this.numberOfLines);
+		//this.protocol.write();
+		//progress.stop();
 		return;
 	}
 
@@ -78,6 +80,7 @@ class Analyzer {
 	 */
 	private analyzeLine(line: string) {
 		line = line.trim();
+		this.numberOfLines++;
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
@@ -89,7 +92,7 @@ class Analyzer {
 	 * @param preprocessor
 	 * @returns
 	 */
-	getRules(preprocessor: Preprocessor): RuleSet {
+	private getRules(preprocessor: Preprocessor): RuleSet {
 		switch (preprocessor) {
 			case Preprocessor.SCSS:
 				return scss_rules;

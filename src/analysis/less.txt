@@ -1,0 +1,40 @@
+
+EXTENSION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Extend: 1919
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Mixins Total: 1511
+Mixin without arguments: 0
+Mixin with arguments: 1511
+
+FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Function: 0
+
+CONDITIONALS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+If: 1186
+Else: 0
+Elseif: 0
+Unless: 0
+
+ITERATION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+While: 0
+For: 0
+Each: 155
+
+VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Variable: 60738
+
+BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Module: 12641
+Color Module: 8908
+Math Module: 1545
+Path Module: 0
+String Module: 121
+List Module: 620
+Unit Module: 274
+Util Module: 1235
+Operator: 17550
+
+VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CSS Variable: 3503
+Calc(): 2218

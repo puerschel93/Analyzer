@@ -6,6 +6,7 @@
 	"scripts": {
 		"analyze": "ts-node src/main.ts analyze",
 		"declone": "ts-node src/main.ts declone",
+		"count": "ts-node src/main.ts count",
 		"test": "jest"
 	},
 	"author": "",
@@ -15,6 +16,7 @@
 		"@octokit/rest": "^18.12.0",
 		"@types/jest": "^27.0.2",
 		"cli-progress": "^3.9.1",
+		"enquirer": "^2.3.6",
 		"jquery": "^3.6.0",
 		"performance-now": "^2.1.0",
 		"puppeteer-extra": "^3.2.3",

@@ -4,6 +4,7 @@
  * Author: Florian Pürschel
  */
 import Analyzer from './analyzer';
+import Counter from './counter';
 import Decloner from './decloner';
 import Logger from './utils/logger';
 
@@ -18,6 +19,9 @@ const start = (): void => {
 			break;
 		case 'declone':
 			declone();
+			break;
+		case 'count':
+			Counter.count();
 			break;
 		default:
 			Logger.error('Invalid command.\n');

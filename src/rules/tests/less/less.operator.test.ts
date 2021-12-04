@@ -1,6 +1,6 @@
 import rules from "../../less";
 
-describe('SCSS - OPERATORS', () => {
+describe('LESS - OPERATORS', () => {
 	test('operator vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.operator);

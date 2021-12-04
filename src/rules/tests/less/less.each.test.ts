@@ -1,6 +1,6 @@
 import rules from "../../less";
 
-describe('SCSS - EACH', () => {
+describe('LESS - EACH', () => {
 	test('each vs. random string', () => {
 		const str = 'something'
 		expect(str).not.toMatch(rules.each);

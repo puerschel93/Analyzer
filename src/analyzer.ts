@@ -1,3 +1,7 @@
+/**
+ * Created: 2021-12-03
+ * Author: Florian Pürschel
+ */
 import cliProgress from 'cli-progress';
 import Preprocessor from './enums/preprocessors';
 import Protocol from './protocol';
@@ -8,6 +12,10 @@ import scss_rules from './rules/scss';
 import styl_rules from './rules/styl';
 import Logger from './utils/logger';
 
+/**
+ * Analyzer class collects all methods that are used to analyzed
+ * the collected preprocessor files.
+ */
 class Analyzer {
 	preprocessor: Preprocessor;
 	rules: RuleSet;
@@ -41,9 +49,8 @@ class Analyzer {
 		let count: number = 0;
 
 		for (const _file of this.files) {
-			let file: string | boolean = this.reader.readFile(_file);
-			if (typeof file === 'string') file.split('\n');
-			else continue;
+			const file: string | boolean = this.reader.readFile(_file);
+			if (typeof file === 'boolean') continue;
 			this.analyzeFile(file);
 			progress.update(++count);
 		}
@@ -58,8 +65,8 @@ class Analyzer {
 	 * all rules are tested on each line.
 	 * @param content array with all lines of the file
 	 */
-	private analyzeFile(content: any) {
-		for (const line of content) {
+	private analyzeFile(content: string) {
+		for (const line of content.split('\n')) {
 			this.analyzeLine(line);
 		}
 	}
@@ -73,13 +80,7 @@ class Analyzer {
 		line = line.trim();
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			if (passed) {
-				if (this.preprocessor === Preprocessor.STYLUS) {
-					if (Object.keys(this.rules)[rule] === 'elseif')
-						console.log(line);
-				}
-				this.protocol.add(Object.keys(this.rules)[rule]);
-			}
+			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
 		}
 	}
 

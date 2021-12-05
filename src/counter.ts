@@ -1,8 +1,16 @@
+/**
+ * Created: 2021-12-05
+ * Author: Florian Pürschel
+ */
 import Preprocessor from './enums/preprocessors';
 import Reader from './reader';
 import Logger from './utils/logger';
 const { Select } = require('enquirer');
 
+/**
+ * The counter class is used to count the number of each syntax variant of the
+ * collected stylus files.
+ */
 class Counter {
 	files: string[];
 	reader: Reader = new Reader(Preprocessor.STYLUS);
@@ -15,6 +23,10 @@ class Counter {
 		this.files = this.reader.readDirectory();
 	}
 
+	/**
+	 * Main counting method to initialize the counting process.
+	 * @returns {Promise<void>}
+	 */
 	async count(): Promise<void> {
 		for (const file of this.files) {
 			this.counter++;
@@ -24,11 +36,18 @@ class Counter {
 			await this.fileAnswer(content);
 		}
 		Logger.clear();
-		console.log(`Classic: ${this.classicSyntax}`);
-		console.log(`Alternative: ${this.alternativeSyntax}`);
-		console.log(`Corrupted: ${this.corrupted}`);
+		Logger.info(`Classic: ${this.classicSyntax}`);
+		Logger.info(`Alternative: ${this.alternativeSyntax}`);
+		Logger.info(`Corrupted: ${this.corrupted}`);
 	}
 
+	/**
+	 * The fileAnswer method is used to print the current stylus file and ask the
+	 * user which syntax variant is used. The given answer is counted in each counting
+	 * variable separately.
+	 * @param file
+	 * @returns {Promise<void>}
+	 */
 	async fileAnswer(file: string): Promise<void> {
 		const prompt = new Select({
 			name: 'syntax',
@@ -36,7 +55,7 @@ class Counter {
 			choices: ['alternative', 'classic', 'corrupted'],
 		});
 
-		console.log(file);
+		Logger.log(file);
 
 		Logger.info(`File ${this.counter}/${this.files.length}`);
 

@@ -12,6 +12,8 @@ import Colors from './colors';
 class Logger {
 	static clear = () => console.clear();
 
+	static log = (message: string) => console.log(message);
+
 	static info = (message: string): void =>
 		console.log(Colors.cyan, 'INFO:\t\t', Colors.white, `${message}`);
 

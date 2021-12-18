@@ -24,6 +24,7 @@ class Analyzer {
 	numberOfFiles: number = 0;
 	numberOfVariableFiles: number = 0;
 	numberOfLines: number = 0;
+	blend: number = 0;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -51,12 +52,13 @@ class Analyzer {
 		for (const _file of this.files) {
 			const file: string | boolean = this.reader.readFile(_file);
 			if (typeof file === 'boolean') continue;
-			this.analyzeFile(file);
+			this.analyzeFile(file, _file);
 			//progress.update(++count);
 		}
 		Logger.info('Finished analysis of ' + this.preprocessor);
 		Logger.info('Number of lines: ' + this.numberOfLines);
-		//this.protocol.write();
+		console.log('RESULT', this.blend);
+		this.protocol.write();
 		//progress.stop();
 		return;
 	}
@@ -67,9 +69,9 @@ class Analyzer {
 	 * all rules are tested on each line.
 	 * @param content array with all lines of the file
 	 */
-	private analyzeFile(content: string) {
+	private analyzeFile(content: string, file: string): void {
 		for (const line of content.split('\n')) {
-			this.analyzeLine(line);
+			this.analyzeLine(line, file);
 		}
 	}
 
@@ -78,12 +80,19 @@ class Analyzer {
 	 * rule set.
 	 * @param line
 	 */
-	private analyzeLine(line: string) {
+	private analyzeLine(line: string, file: string): void {
 		line = line.trim();
 		this.numberOfLines++;
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
-			if (passed) this.protocol.add(Object.keys(this.rules)[rule]);
+			if (passed) {
+				if (Object.keys(this.rules)[rule] === 'colorModule')
+					if (line.includes('blend')) {
+						this.blend++;
+						console.log(line);
+					}
+				this.protocol.add(Object.keys(this.rules)[rule]);
+			}
 		}
 	}
 
@@ -122,7 +131,6 @@ class Analyzer {
 		const scss = this.factory(Preprocessor.SCSS);
 		const less = this.factory(Preprocessor.LESS);
 		const stylus = this.factory(Preprocessor.STYLUS);
-
 		return [scss, less, stylus];
 	}
 }

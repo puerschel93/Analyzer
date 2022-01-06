@@ -24,7 +24,8 @@ class Analyzer {
 	numberOfFiles: number = 0;
 	numberOfVariableFiles: number = 0;
 	numberOfLines: number = 0;
-	blend: number = 0;
+	result: any = {};
+	numberOfFunctionFiles: number = 0;
 
 	constructor(preprocessor: Preprocessor) {
 		this.preprocessor = preprocessor;
@@ -50,14 +51,18 @@ class Analyzer {
 		let count: number = 0;
 
 		for (const _file of this.files) {
+			this.numberOfFiles++;
 			const file: string | boolean = this.reader.readFile(_file);
 			if (typeof file === 'boolean') continue;
 			this.analyzeFile(file, _file);
 			//progress.update(++count);
 		}
-		Logger.info('Finished analysis of ' + this.preprocessor);
-		Logger.info('Number of lines: ' + this.numberOfLines);
-		console.log('RESULT', this.blend);
+		//Logger.info('Finished analysis of ' + this.preprocessor);
+		//Logger.info('Number of lines: ' + this.numberOfLines);
+
+		Logger.info('Number of files: ' + this.numberOfFiles);
+		Logger.info('Number of function files: ' + this.numberOfFunctionFiles);
+
 		this.protocol.write();
 		//progress.stop();
 		return;
@@ -70,9 +75,16 @@ class Analyzer {
 	 * @param content array with all lines of the file
 	 */
 	private analyzeFile(content: string, file: string): void {
-		for (const line of content.split('\n')) {
-			this.analyzeLine(line, file);
+		let numberOfLines: number = content
+			.split('\n')
+			.filter((el) => el !== '' && !el.startsWith('//')).length;
+		let numberOfDetections: number = 0;
+		for (const line of content
+			.split('\n')
+			.filter((el) => el !== '' && !el.startsWith('//'))) {
+			numberOfDetections += this.analyzeLine(line, file);
 		}
+		if (numberOfDetections > 0) this.numberOfFunctionFiles++;
 	}
 
 	/**
@@ -80,20 +92,19 @@ class Analyzer {
 	 * rule set.
 	 * @param line
 	 */
-	private analyzeLine(line: string, file: string): void {
+	private analyzeLine(line: string, file: string): number {
 		line = line.trim();
 		this.numberOfLines++;
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'colorModule')
-					if (line.includes('blend')) {
-						this.blend++;
-						console.log(line);
-					}
+				if (Object.keys(this.rules)[rule] === 'function') {
+					return 1;
+				}
 				this.protocol.add(Object.keys(this.rules)[rule]);
 			}
 		}
+		return 0;
 	}
 
 	/**
@@ -131,7 +142,7 @@ class Analyzer {
 		const scss = this.factory(Preprocessor.SCSS);
 		const less = this.factory(Preprocessor.LESS);
 		const stylus = this.factory(Preprocessor.STYLUS);
-		return [scss, less, stylus];
+		return [scss];
 	}
 }
 

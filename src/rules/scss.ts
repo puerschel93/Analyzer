@@ -6,7 +6,7 @@ class Rules extends CSSRules implements RuleSet {
 	mixinWithoutArguments: RegExp = new RegExp(/(?!)/);
   	mixinWithArguments: RegExp = new RegExp(/^[ ]*\@mixin[^]+/)
 	function: RegExp = new RegExp(/^\@function[ ]+[a-zA-Z\-\_]+[ ]*\([^]*\) \{/);
-	if: RegExp = new RegExp(/^\@if[ ]+[^]+[ ]*\{/)
+	if: RegExp = new RegExp(/^\}*[ ]*\@if[ ]+[^]+[ ]*\{*/)
 	else: RegExp = new RegExp(/^\}[ ]*\@else[ ]*\{/)
 	elseif: RegExp = new RegExp(/^\}[ ]*\@else if[ ]+[^]+[ ]*\{/)
 	unless: RegExp = new RegExp(/(?!)/)

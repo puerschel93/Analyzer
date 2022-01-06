@@ -18,23 +18,23 @@ Unless: 308
 
 ITERATION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 While: 0
-For: 2421
+For: 2317
 Each: 0
 
 VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Variable: 83875
 
 BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Module: 23019
-Color Module: 14224
-Math Module: 1783
-Path Module: 32
-String Module: 3201
-List Module: 1169
-Unit Module: 2076
-Util Module: 905
-Operator: 28255
+Module: 0
+Color Module: 0
+Math Module: 0
+Path Module: 0
+String Module: 0
+List Module: 0
+Unit Module: 0
+Util Module: 0
+Operator: 24326
 
 VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CSS Variable: 3222
-Calc(): 7112
+Calc(): 7106

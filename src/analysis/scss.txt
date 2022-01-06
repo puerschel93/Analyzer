@@ -8,10 +8,10 @@ Mixin without arguments: 0
 Mixin with arguments: 7140
 
 FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Function: 769
+Function: 0
 
 CONDITIONALS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-If: 4465
+If: 4501
 Else: 778
 Elseif: 419
 Unless: 0
@@ -25,16 +25,16 @@ VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Variable: 77990
 
 BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Module: 20031
-Color Module: 11695
-Math Module: 1529
-Path Module: 838
-String Module: 701
-List Module: 1441
-Unit Module: 4117
-Util Module: 664
-Operator: 21451
+Module: 19786
+Color Module: 11646
+Math Module: 1480
+Path Module: 796
+String Module: 677
+List Module: 1412
+Unit Module: 4068
+Util Module: 649
+Operator: 19052
 
 VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CSS Variable: 9240
-Calc(): 6211
+Calc(): 6173

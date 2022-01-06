@@ -23,7 +23,7 @@ class Rules extends CSSRules implements RuleSet{
   	mixinWithArguments: RegExp = new RegExp(/^\.[^]+\(\@[a-zA-Z0-9\,\@ ]+\)[ ]*\{/);
 	function: RegExp = new RegExp(/(?!)/);
 	if: RegExp = new RegExp(/^[^]+\(\@[^]+\)[ ]*when[ ]*\(\@[^]+\)[ ]*\{/);
-	else: RegExp = new RegExp(/(?!)/);
+	else: RegExp = new RegExp(/[^]*\bif\([^]+/);
 	elseif: RegExp = new RegExp(/(?!)/);
 	unless: RegExp = new RegExp(/(?!)/)
 	each: RegExp = new RegExp(/^[^]*each\([a-zA-Z0-9\@\_\-\.\{\}\(\)\, ]+[ ]*\{/);

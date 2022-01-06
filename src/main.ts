@@ -36,6 +36,19 @@ const analyze = async (): Promise<void> => {
 	for (const analyzer of Analyzer) {
 		await analyzer.analyze();
 	}
+
+	let merged: any = {};
+
+	for (const analyzer of Analyzer) {
+		for (const val of Object.keys(analyzer.result)) {
+			merged[val]
+				? (merged[val] += analyzer.result[val])
+				: (merged[val] = analyzer.result[val]);
+		}
+	}
+
+	console.log(merged);
+
 	Logger.success('All analyzers finished.\n');
 	return;
 };

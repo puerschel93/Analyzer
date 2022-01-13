@@ -8,7 +8,7 @@ Mixin without arguments: 0
 Mixin with arguments: 7140
 
 FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Function: 0
+Function: 769
 
 CONDITIONALS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 If: 4501
@@ -18,21 +18,21 @@ Unless: 0
 
 ITERATION: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 While: 37
-For: 179
+For: 0
 Each: 260
 
 VARIABLES: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Variable: 77990
 
 BUILT-IN-FUNCTIONS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Module: 19786
-Color Module: 11646
-Math Module: 1480
-Path Module: 796
-String Module: 677
-List Module: 1412
-Unit Module: 4068
-Util Module: 649
+Module: 19896
+Color Module: 11664
+Math Module: 1507
+Path Module: 825
+String Module: 680
+List Module: 1423
+Unit Module: 4090
+Util Module: 651
 Operator: 19052
 
 VANILLA CSS: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -98,7 +98,8 @@ class Analyzer {
 		for (const rule in this.rules.array) {
 			const passed = this.rules.array[rule].test(line);
 			if (passed) {
-				if (Object.keys(this.rules)[rule] === 'function') {
+				if (Object.keys(this.rules)[rule] === 'for') {
+					console.log(file);
 					return 1;
 				}
 				this.protocol.add(Object.keys(this.rules)[rule]);
